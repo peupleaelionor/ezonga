@@ -22,6 +22,12 @@ export const profileAPI = {
   updateMe: (data: any) => api.put('/profiles/me', data),
 };
 
+// CORRECTION ICI : On accepte maintenant 2 arguments séparés
+export const matchAPI = {
+  swipe: (targetId: string, action: string) => api.post('/matches/swipe', { targetId, action }),
+  list: () => api.get('/matches/list'),
+};
+
 export const messageAPI = {
   getConversations: () => api.get('/messages/conversations'),
   getMessages: (otherUserId: string) => api.get(`/messages/${otherUserId}`),

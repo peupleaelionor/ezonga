@@ -25,7 +25,7 @@ export default function Landing() {
       {/* Background Animé (Particules) */}
       {isClient && (
         <div className="absolute inset-0 pointer-events-none">
-          {particles.map((p) => (
+          {particles.map((p, i) => (
             <motion.div
               key={p.id}
               className="absolute w-2 h-2 bg-emerald-500 rounded-full opacity-20 blur-sm"

@@ -29,7 +29,7 @@ export default function Feed() {
     const currentProfile = profiles[index];
     if (!currentProfile) return;
 
-    await matchAPI.swipe(currentProfile.user.id, direction === 'right' ? 'like' : 'dislike');
+    await matchAPI.swipe(currentProfile.user.id, direction === 'right' ? 'like' : 'pass');
     
     if (direction === 'right') {
       // Simuler une notification de Match (Le backend le ferait en vrai)

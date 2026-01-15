@@ -22,11 +22,14 @@ export const register = async (req: AuthRequest, res: Response) => {
             name,
             age,
             bio: 'Nouvelle star d\'Ezonga !',
-            photos: ['https://via.placeholder.com/400'], // Placeholder
+            photos: JSON.stringify(['https://via.placeholder.com/400']), // Placeholder
             vibe: 'chill',
-            interests: ['Musique', 'Rumba']
+            interests: JSON.stringify(['Musique', 'Rumba'])
           }
         }
+      },
+      include: {
+        profile: true
       }
     });
 

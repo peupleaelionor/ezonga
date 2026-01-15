@@ -7,10 +7,10 @@ export default function Navbar() {
   const path = usePathname();
 
   const navItems = [
-    { icon: Home, label: 'Feed', href: '/app/feed' },
-    { icon: Heart, label: 'Matches', href: '/app/matches' },
-    { icon: MessageCircle, label: 'Chat', href: '/app/chat' },
-    { icon: User, label: 'Profil', href: '/app/profile' },
+    { icon: Home, label: 'Feed', href: '/feed' },
+    { icon: Heart, label: 'Matches', href: '/matches' },
+    { icon: MessageCircle, label: 'Chat', href: '/chat' },
+    { icon: User, label: 'Profil', href: '/profile' },
   ];
 
   if (path === '/' || path.startsWith('/auth')) return null;
