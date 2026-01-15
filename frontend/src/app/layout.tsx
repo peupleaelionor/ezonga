@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
 import ErrorBoundary from '../components/ErrorBoundary';
-import { ThemeProvider } from '../lib/theme';
+import { ClientThemeProvider } from '../components/ClientThemeProvider';
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -67,11 +67,11 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider>
+        <ClientThemeProvider>
           <ErrorBoundary>
             {children}
           </ErrorBoundary>
-        </ThemeProvider>
+        </ClientThemeProvider>
         <Toaster
           position="bottom-center"
           toastOptions={{
