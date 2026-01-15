@@ -1,0 +1,24 @@
+import express, { Express } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import 'express-async-errors';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import dotenv from 'dotenv';
+import { setupSocket } from './config/socket';
+import { errorHandler } from './middleware/error';
+import routes from './routes';
+import uploadRoutes from './routes/upload.routes';
+dotenv.config();
+const app: Express = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, { cors: { origin: '*' } });
+app.use(helmet());
+app.use(cors());
+app.use(express.json({ limit: '10mb' }));
+app.use('/uploads', express.static('uploads')); // Servir les images
+app.use('/api', routes);
+app.use('/api/upload', uploadRoutes);
+setupSocket(io);
+app.use(errorHandler);
+httpServer.listen(5000, () => console.log(`🚀 Server running on 5000`));
