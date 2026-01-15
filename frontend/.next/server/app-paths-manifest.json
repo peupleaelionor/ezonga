@@ -1,4 +1,12 @@
 {
+  "/(app)/chat/[id]/page": "app/(app)/chat/[id]/page.js",
+  "/(app)/chat/page": "app/(app)/chat/page.js",
+  "/(app)/feed/page": "app/(app)/feed/page.js",
+  "/(app)/matches/page": "app/(app)/matches/page.js",
+  "/(app)/profile/page": "app/(app)/profile/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/auth/register/page": "app/auth/register/page.js",
   "/page": "app/page.js"
 }
