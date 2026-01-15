@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useEffect } from 'react';
 
 interface ThemeState {
   isDark: boolean;
@@ -19,9 +20,6 @@ export const useThemeStore = create<ThemeState>()(
 );
 
 // Theme provider component
-import { useEffect } from 'react';
-import { useThemeStore } from './store';
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { isDark } = useThemeStore();
 
