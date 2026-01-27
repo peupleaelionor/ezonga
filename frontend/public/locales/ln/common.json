@@ -1,0 +1,42 @@
+{
+  "app_name": "Ezonga",
+  "welcome_title": "Bienvenue sur Ezonga",
+  "welcome_slogan": "Awa esengeli kokota.",
+  "login_btn": "Kota",
+  "signup_btn": "Bosala Compte",
+  "logout": "Kota Kokota",
+  
+  "nav_feed": "Découvrir",
+  "nav_matches": "Sika",
+  "nav_chat": "Messages",
+  "nav_profile": "Profil",
+  "nav_events": "Ba Ballets",
+  "nav_settings": "Paramètres",
+  
+  "like": "To na ngai ?",
+  "dislike": "Passer",
+  "match_title": "SÍKA !",
+  "match_subtitle": "To et {{name}} avez matché",
+  "keep_swiping": "Kobwaka lisusu",
+  "send_message": "Kotisa",
+  
+  "vibe_chill": "Po Calme",
+  "vibe_party": "Kota Fièvre",
+  "vibe_business": "Business",
+  
+  "ghost_mode": "Mode Fantôme",
+  "notifications": "Ba Zongi",
+  "verified": "Ezanaki",
+  "online": "Kota ye ye",
+  
+  "common_no": "Yo te",
+  "common_yes": "Eza",
+  "common_cancel": "Cancel",
+  "common_save": "Boleli",
+  "error_occurred": "Mabe akomaki",
+  "loading": "Bobimisi...",
+  
+  "profile_bio": "A propos na ngai",
+  "profile_interests": "Masengo",
+  "profile_photos": "Ba Foto"
+}

@@ -3,49 +3,60 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
-  id String @id @default(uuid())
-  email String @unique
-  password String
-  verified Boolean @default(false)
-  profile Profile?
-  sentMatches Match[] @relation("SenderMatches")
+  id            String    @id @default(uuid())
+  email         String    @unique
+  phone         String?   @unique
+  password      String
+  verified      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  
+  profile       Profile?
+  sentMatches   Match[]   @relation("SenderMatches")
   receivedMatches Match[] @relation("ReceiverMatches")
-  sentMessages Message[] @relation("SentMessages")
+  sentMessages  Message[] @relation("SentMessages")
   receivedMessages Message[] @relation("ReceivedMessages")
 }
+
 model Profile {
-  id String @id @default(uuid())
-  userId String @unique
-  name String
-  age Int
-  bio String?
-  location String?
-  photos String
-  interests String
-  vibe String @default("chill")
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  name          String
+  age           Int
+  bio           String?
+  location      String?
+  vibe          String    @default("chill")
+  photos        String[]
+  interests     String[]
+  
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 model Match {
-  id String @id @default(uuid())
-  senderId String
-  receiverId String
-  status String @default("pending")
-  createdAt DateTime @default(now())
-  sender User @relation("SenderMatches", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver User @relation("ReceiverMatches", fields: [receiverId], references: [id], onDelete: Cascade)
+  id            String    @id @default(uuid())
+  senderId      String
+  receiverId    String
+  status        String    @default("pending")
+  createdAt     DateTime  @default(now())
+  
+  sender        User      @relation("SenderMatches", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver      User      @relation("ReceiverMatches", fields: [receiverId], references: [id], onDelete: Cascade)
+  
   @@unique([senderId, receiverId])
 }
 
 model Message {
-  id String @id @default(uuid())
-  senderId String
-  receiverId String
-  content String
-  createdAt DateTime @default(now())
-  sender User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  id            String    @id @default(uuid())
+  senderId      String
+  receiverId    String
+  content       String
+  read          Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  
+  sender        User      @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver      User      @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
 }
