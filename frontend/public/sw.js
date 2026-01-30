@@ -1,5 +1,5 @@
 // public/sw.js
-const CACHE_NAME = 'ezonga-v1';
+const CACHE_NAME = 'moto-v1';
 const urlsToCache = [
   '/',
   '/manifest.json',

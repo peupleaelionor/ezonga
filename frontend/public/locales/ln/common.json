@@ -1,7 +1,7 @@
 {
-  "app_name": "Ezonga",
-  "welcome_title": "Bienvenue sur Ezonga",
-  "welcome_slogan": "Awa esengeli kokota.",
+  "app_name": "Moto",
+  "welcome_title": "Bienvenue sur Moto",
+  "welcome_slogan": "Pesa ngai moto 🔥",
   "login_btn": "Kota",
   "signup_btn": "Bosala Compte",
   "logout": "Kota Kokota",
@@ -13,10 +13,10 @@
   "nav_events": "Ba Ballets",
   "nav_settings": "Paramètres",
   
-  "like": "To na ngai ?",
+  "like": "Moto 🔥",
   "dislike": "Passer",
-  "match_title": "SÍKA !",
-  "match_subtitle": "To et {{name}} avez matché",
+  "match_title": "MOTO YA BOLINGO 🔥",
+  "match_subtitle": "Yo na {{name}} bozali na moto!",
   "keep_swiping": "Kobwaka lisusu",
   "send_message": "Kotisa",
   

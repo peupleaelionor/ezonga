@@ -21,7 +21,7 @@ export const register = async (req: AuthRequest, res: Response) => {
           create: {
             name,
             age,
-            bio: 'Nouvelle star d\'Ezonga !',
+            bio: 'Nouvelle star d\'Moto !',
             photos: JSON.stringify(['https://via.placeholder.com/400']), // Placeholder
             vibe: 'chill',
             interests: JSON.stringify(['Musique', 'Rumba'])

@@ -1,5 +1,5 @@
 {
-  "name": "ezonga-backend",
+  "name": "moto-backend",
   "version": "1.0.0",
   "scripts": {
     "dev": "tsx watch src/app.ts",
