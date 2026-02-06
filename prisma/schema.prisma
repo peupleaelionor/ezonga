@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  phone     String?  @unique
+  password  String
+  firstName String
+  lastName  String
+  age       Int
+  gender    String
+  city      String
+  country   String
+  bio       String?
+  photos    String   // JSON array of photo URLs
+  interests String   // JSON array of interests
+  lookingFor String  // Relationship type
+  verified  Boolean  @default(false)
+  verifiedBy String? // ID of user who verified this user
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sentLikes     Like[]     @relation("SentLikes")
+  receivedLikes Like[]     @relation("ReceivedLikes")
+  sentMessages  Message[]  @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+  matchedUsers   Match[]    @relation("User1Matches")
+  matchedByUsers Match[]    @relation("User2Matches")
+  photoVerifications PhotoVerification[]
+  aiMatchScores  AIMatchScore[]
+  receivedConversationSuggestions ConversationSuggestion[] @relation("ReceivedSuggestions")
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  targetId  String
+  createdAt DateTime @default(now())
+
+  user   User @relation("SentLikes", fields: [userId], references: [id], onDelete: Cascade)
+  target User @relation("ReceivedLikes", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetId])
+}
+
+model Match {
+  id         String   @id @default(cuid())
+  user1Id    String
+  user2Id    String
+  createdAt  DateTime @default(now())
+  lastActive DateTime?
+
+  user1 User @relation("User1Matches", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2 User @relation("User2Matches", fields: [user2Id], references: [id], onDelete: Cascade)
+
+  @@unique([user1Id, user2Id])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  senderId  String
+  receiverId String
+  content   String?
+  audioUrl  String?  // For voice messages
+  messageType String @default("text") // "text" or "audio"
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+// V3: AI-Powered Features
+
+// Photo verification using VLM (Vision Language Model)
+model PhotoVerification {
+  id          String   @id @default(cuid())
+  userId      String
+  photoUrl    String
+  isVerified  Boolean
+  confidence  Float
+  analysis    String   // AI analysis results
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Conversation suggestions using LLM
+model ConversationSuggestion {
+  id              String   @id @default(cuid())
+  userId          String
+  matchId         String
+  suggestions     String   // JSON array of suggestions
+  context         String?  // Conversation context
+  createdAt       DateTime @default(now())
+  used            Boolean  @default(false)
+
+  user User @relation("ReceivedSuggestions", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, matchId])
+}
+
+// AI-powered matching scores
+model AIMatchScore {
+  id          String   @id @default(cuid())
+  userId      String
+  targetId    String
+  score       Float    // 0-100
+  reasons     String   // JSON array of reasons
+  category    String   // e.g., "interests", "location", "values"
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, targetId, category])
+  @@index([userId])
+}
+
+// Voice message with TTS/ASR
+model VoiceMessage {
+  id          String   @id @default(cuid())
+  messageId   String   @unique
+  audioUrl    String
+  transcript  String?
+  duration    Int      // in seconds
+  ttsGenerated Boolean @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([messageId])
+}
